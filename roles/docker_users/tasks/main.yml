@@ -1,0 +1,16 @@
+---
+- name: Add users to docker group
+  ansible.builtin.user:
+    name: '{{ item }}'
+    groups: docker
+    append: true
+    state: present
+  loop: '{{ docker_users }}'
+
+- name: Allow docker group to restart docker service
+  ansible.builtin.template:
+    src: docker.rules
+    dest: /etc/polkit-1/rules.d/25-docker.rules
+    owner: root
+    group: root
+    mode: '0644'

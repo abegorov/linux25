@@ -1,0 +1,13 @@
+---
+- name: Create users
+  ansible.builtin.user:
+    name: '{{ item.key }}'
+    groups: '{{ item.value.groups | default([]) }}'
+    append: true
+    password: '{{ item.value.password | default("!") }}'
+    update_password: on_create
+    shell: /bin/bash
+    state: present
+  loop: '{{ useradd | ansible.builtin.dict2items }}'
+  loop_control:
+    label: '{{ item.key }}'

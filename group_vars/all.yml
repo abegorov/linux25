@@ -1,0 +1,15 @@
+---
+  groupadd: ['admin']
+  useradd:
+    otusadm:
+      password: '{{ lookup("ansible.builtin.password",
+        "passwords/otusadm.txt", encrypt="sha512_crypt", length=26) }}'
+      groups: ['admin']
+    otus:
+      password: '{{ lookup("ansible.builtin.password",
+        "passwords/otus.txt", encrypt="sha512_crypt", length=26) }}'
+    vagrant:
+      groups: ['admin']
+    root:
+      groups: ['admin']
+  docker_users: ['otus']

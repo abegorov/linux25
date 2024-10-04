@@ -1,0 +1,16 @@
+---
+- name: Update login.sh script
+  ansible.builtin.template:
+    src: libexec/login.sh
+    dest: /usr/local/libexec/login.sh
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Update sshd PAM configuration file
+  ansible.builtin.template:
+    src: sshd
+    dest: /etc/pam.d/sshd
+    owner: root
+    group: root
+    mode: '0644'

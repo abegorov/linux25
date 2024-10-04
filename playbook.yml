@@ -1,0 +1,11 @@
+---
+- name: Common provision
+  hosts: all
+  become: true
+  gather_facts: false
+  roles:
+    - groupadd
+    - useradd
+    - pam
+    - docker
+    - docker_users
